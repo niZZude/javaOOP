@@ -1,28 +1,21 @@
 import java.util.List;
 
-public class pontoDeColeta {
+class PontoDeColeta {
     private String nome;
-    private String localizacao;
-    private List<String> tiposDeResiduosAceitos;
+    private String endereco;
+    private List<String> tiposAceitos;
 
-    public pontoDeColeta(String nome, String localizacao, List<String> tiposDeResiduos) {
+    public PontoDeColeta(String nome, String endereco, List<String> tiposAceitos) {
         this.nome = nome;
-        this.localizacao = localizacao;
-        this.tiposDeResiduosAceitos = tiposDeResiduos;
+        this.endereco = endereco;
+        this.tiposAceitos = tiposAceitos;
     }
 
-    public boolean aceitaResiduo(String tipo) {
-        return tiposDeResiduosAceitos.contains(tipo);
+    public String getNome() {
+        return nome;
     }
 
-    public void exibirInformacoes() {
-        System.out.println(this);  // Chama o método toString() automaticamente
-    }
-
-    @Override
-    public String toString() {
-        return "Nome: " + nome + "\n" +
-                "Localização: " + localizacao + "\n" +
-                "Resíduos aceitos: " + tiposDeResiduosAceitos;
+    public boolean aceitaResiduo(Residuo residuo) {
+        return tiposAceitos.contains(residuo.getNome());
     }
 }
