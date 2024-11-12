@@ -1,12 +1,12 @@
-import java.util.List;
-
 class Usuario {
     private String nome;
+    private String senha;
     private int nivel;
-    private int pontos;
+    private double pontos;
 
-    public Usuario(String nome) {
+    public Usuario(String nome, String senha) {
         this.nome = nome;
+        this.senha = senha;
         this.nivel = 1; // Nível inicial
         this.pontos = 0; // Pontos iniciais
     }
@@ -19,12 +19,24 @@ class Usuario {
         return nivel;
     }
 
-    public void descartarResiduos(PontoDeColeta ponto, List<Residuo> residuos) {
-        for (Residuo residuo : residuos) {
-            pontos += residuo.calcularPontuacao(); // Acumula pontos
-            System.out.println("Você descartou " + residuo.getNome() + " e ganhou " + residuo.calcularPontuacao() + " pontos.");
-        }
-        verificarNivel(); // Verifica se o usuário subiu de nível
+    public double getPontos() {
+        return pontos;
+    }
+
+    // Método de autenticação
+    public boolean autenticar(String senha) {
+        return this.senha.equals(senha);
+    }
+
+    // Método para reciclar e ganhar pontos
+    public void reciclar(Residuo residuo, double quantidadeKg) {
+        double pontosGanhados = residuo.calcularPontuacao(quantidadeKg); // Pontos por quantidade reciclada
+        this.pontos += pontosGanhados;
+
+        System.out.println("Você reciclou " + quantidadeKg + " kg de " + residuo.getNome() + " e ganhou " + pontosGanhados + " pontos!");
+
+        // Verificar progresso de nível
+        verificarNivel();
     }
 
     private void verificarNivel() {

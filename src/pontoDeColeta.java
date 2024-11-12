@@ -16,6 +16,6 @@ class PontoDeColeta {
     }
 
     public boolean aceitaResiduo(Residuo residuo) {
-        return tiposAceitos.contains(residuo.getNome());
+        return tiposAceitos.contains(residuo.getNome().toLowerCase()); // Aceitar resíduos de forma case insensitive
     }
 }
